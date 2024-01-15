@@ -67,7 +67,11 @@
             </div>
 
             <!-- Menu Toggler -->
-            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#id-navbar-menu" aria-controls="id-navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler ms-auto" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#id-navbar-menu" 
+            >
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -107,7 +111,7 @@
     </nav>
 
     <!-- Progress Bar -->
-    <div class="progress-bar"></div>
+    <div class="custom-progress-bar"></div>
 
     <!-- Content -->
     <div class="container-fluid">
@@ -164,7 +168,7 @@
             As a quantitative methodologist, Song has developed Markov chain demography models for genealogical processes, population estimation methods for overlapping generations, the extended Goodman-Keyfitz-Pullum kinship model with time-varying rates, multivariate mixed-effects location-scale models for inter- and multigenerational data, and weighting methods for reconciling prospective and retrospective mobility estimates. She is currently working on occupation and industry write-in auto-coding using machine learning methods.
             </p>
             <p>
-            Song received the 2021 William Julius Wilson Early Career Award from the American Sociological Association. Her publications received multiple awards from the American Sociological Association (ASA), the International Sociological Association Research Committee on Social Stratification and Mobility (ISA-RC28), the Integrated Public Use Microdata Series (IPUMS), and the Demographic Research. She received the Mentor of the Year Award from the Department of Sociology at the University of Pennsylvania in 2022. She has served on the editorial boards of the <em>American Journal of Sociology, Demography, Sociological Methodology, Social Science Research, and Research in Social Stratification and Mobility. </em>
+            Song received the 2021 William Julius Wilson Early Career Award from the American Sociological Association. Her publications received multiple awards from the American Sociological Association (ASA), the International Sociological Association Research Committee on Social Stratification and Mobility (ISA-RC28), the Integrated Public Use Microdata Series (IPUMS), and the Demographic Research. She received the Mentor of the Year Award from the Department of Sociology at the University of Pennsylvania in 2022. She has served on the editorial boards of the <em>American Journal of Sociology, Demography, Sociological Methodology, Social Science Research, and Research in Social Stratification and Mobility.</em>
             </p>
         </div>
 
@@ -253,27 +257,38 @@
 
     <!-- Nav Bar Offset -->
     <script type="text/javascript">
-        $(document).ready(function() {
+        function resizeNavBar() {
             var navbarHeight = $('#navbar').outerHeight(true);
             $('body').css({'padding-top': navbarHeight});
+        };
+
+        $(document).ready(function() {
+            resizeNavBar();
         });
+
+        window.addEventListener("resize", resizeNavBar);
     </script>
 
     <!-- Progress Bar Status -->
     <script type="text/javascript">
-    const progressBar = document.querySelector('.progress-bar');
+        const progressBar = document.querySelector('.custom-progress-bar');
 
-    var progressBarStatus = function(){
-        const fullHeight = $(document).height()
-        const windowHeight = $(window).height()
-        const windowScroll = $(window).scrollTop()
+        function progressBarStatus(){
+            let fullHeight = $(document).height()
+            let windowHeight = $(window).height()
+            let windowScroll = $(window).scrollTop()
 
-        const status = (windowScroll / (fullHeight - windowHeight)) * 100;
+            let status;
+            if (fullHeight != windowHeight) {
+                status = (windowScroll / (fullHeight - windowHeight)) * 100;
+            } else {
+                status = 0;
+            };
 
-        progressBar.style.width = status + '%';
-    };
+            progressBar.style.width = status + '%';
+        };
 
-    window.addEventListener("scroll", progressBarStatus);
+        window.addEventListener("scroll", progressBarStatus);
     </script>
 
 </body>
